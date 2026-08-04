@@ -1,0 +1,3238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Little Corner ♡</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    overflow:hidden;
+    font-family:"Trebuchet MS",Arial,sans-serif;
+    background:#efd0aa;
+    user-select:none;
+    touch-action:none;
+}
+
+#desk{
+    width:100vw;
+    height:100vh;
+    position:relative;
+    overflow:hidden;
+
+    background:
+    repeating-linear-gradient(
+        0deg,
+        rgba(100,55,25,.05) 0px,
+        rgba(100,55,25,.05) 2px,
+        transparent 2px,
+        transparent 35px
+    ),
+    #efd0aa;
+}
+
+/* ================= TITLE ================= */
+
+.title{
+    position:absolute;
+    top:18px;
+    left:50%;
+    transform:translateX(-50%);
+    text-align:center;
+    z-index:2;
+    pointer-events:none;
+}
+
+.title h1{
+    color:#735246;
+    font-size:clamp(23px,4vw,40px);
+}
+
+.title p{
+    color:#9b7465;
+    font-size:13px;
+    margin-top:5px;
+}
+
+/* ================= PROFILE PHOTO ================= */
+
+.profile-circle{
+    position:absolute;
+    top:22px;
+    left:30px;
+    width:95px;
+    height:95px;
+    border-radius:50%;
+    background:#fff8ed;
+    border:6px solid #fff8ed;
+    box-shadow:
+        0 5px 12px rgba(80,50,30,.22),
+        0 0 0 3px #d8ad91;
+    overflow:hidden;
+    z-index:100;
+}
+
+.profile-circle img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.profile-name{
+    position:absolute;
+    top:122px;
+    left:29px;
+    width:100px;
+    text-align:center;
+    font-size:10px;
+    color:#765548;
+    font-weight:bold;
+}
+
+/* ================= DRAG ITEMS ================= */
+
+.item{
+    position:absolute;
+    cursor:grab;
+    z-index:10;
+    touch-action:none;
+}
+
+.item:active{
+    cursor:grabbing;
+}
+
+.dragging{
+    filter:drop-shadow(8px 10px 5px rgba(70,45,30,.25));
+}
+
+/* ================= NOTEBOOK ================= */
+
+.notebook{
+    width:120px;
+    height:155px;
+    left:8%;
+    top:27%;
+    background:#fff0a8;
+    border-radius:5px;
+    box-shadow:5px 6px 0 #c6a96f;
+    transform:rotate(-5deg);
+}
+
+.notebook .stripe{
+    position:absolute;
+    right:13px;
+    top:0;
+    width:7px;
+    height:100%;
+    background:#82a5a5;
+}
+
+.notebook .heart{
+    position:absolute;
+    left:38px;
+    top:52px;
+    font-size:38px;
+    color:#df8d91;
+}
+
+/* ================= NOTEPAD ================= */
+
+.notepad{
+    width:105px;
+    height:135px;
+    left:20%;
+    bottom:27%;
+    background:#fffdf2;
+    border-radius:4px;
+    box-shadow:5px 6px 0 #c7a978;
+    transform:rotate(4deg);
+    overflow:hidden;
+}
+
+.notepad:before{
+    content:"";
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:20px;
+    background:#e7a6a6;
+}
+
+.notepad:after{
+    content:"♡  NOTES  ♡";
+    position:absolute;
+    left:12px;
+    top:32px;
+    color:#9b7465;
+    font-size:12px;
+    font-weight:bold;
+}
+
+/* ================= PEN ================= */
+
+.pen{
+    width:14px;
+    height:115px;
+    left:30%;
+    bottom:28%;
+    background:#d68f9b;
+    border-radius:8px;
+    transform:rotate(35deg);
+    box-shadow:3px 4px 0 rgba(80,50,30,.2);
+}
+
+.pen:before{
+    content:"";
+    position:absolute;
+    top:-15px;
+    left:2px;
+    border-left:5px solid transparent;
+    border-right:5px solid transparent;
+    border-bottom:17px solid #555;
+}
+
+.pen:after{
+    content:"";
+    position:absolute;
+    right:-3px;
+    bottom:-8px;
+    width:18px;
+    height:20px;
+    background:#f3d3d8;
+    border-radius:5px 5px 9px 9px;
+    border:2px solid #d28d99;
+    box-shadow:
+        inset 0 2px 0 rgba(255,255,255,.5),
+        0 2px 2px rgba(80,50,30,.18);
+}
+
+/* ================= PENCIL ================= */
+
+.pencil{
+    width:12px;
+    height:120px;
+    left:24%;
+    top:27%;
+    background:#e7be68;
+    border-radius:5px;
+    transform:rotate(6deg);
+}
+
+.pencil:before{
+    content:"";
+    position:absolute;
+    top:-14px;
+    border-left:6px solid transparent;
+    border-right:6px solid transparent;
+    border-bottom:15px solid #c89472;
+}
+
+/* ================= CAMERA ================= */
+
+.camera{
+    width:105px;
+    height:72px;
+    left:34%;
+    top:25%;
+    background:#55565c;
+    border-radius:12px;
+    transform:rotate(-5deg);
+    box-shadow:4px 5px 0 rgba(70,50,40,.2);
+}
+
+.camera:before{
+    content:"";
+    position:absolute;
+    width:47px;
+    height:47px;
+    left:28px;
+    top:12px;
+    border-radius:50%;
+    background:#36373c;
+    border:5px solid #7c7d82;
+}
+
+.camera:after{
+    content:"";
+    position:absolute;
+    width:13px;
+    height:13px;
+    left:45px;
+    top:29px;
+    border-radius:50%;
+    background:#b9d9e6;
+    border:3px solid #aaa;
+}
+
+/* ================= CUP ================= */
+
+.cup{
+    width:82px;
+    height:72px;
+    left:51%;
+    top:27%;
+    background:#fffaf1;
+    border:4px solid #c5c0b8;
+    border-radius:10px 10px 30px 30px;
+}
+
+.cup:before{
+    content:"";
+    position:absolute;
+    width:48px;
+    height:48px;
+    left:13px;
+    top:7px;
+    border-radius:50%;
+    background:#e7a067;
+    border:5px solid white;
+}
+
+.cup:after{
+    content:"";
+    position:absolute;
+    width:25px;
+    height:30px;
+    right:-27px;
+    top:17px;
+    border:5px solid #c5c0b8;
+    border-left:0;
+    border-radius:0 18px 18px 0;
+}
+
+/* ================= BOOK ================= */
+
+.book{
+    width:110px;
+    height:140px;
+    right:9%;
+    top:29%;
+    background:#aa99d0;
+    border-radius:5px;
+    box-shadow:5px 6px 0 #8d7bb3;
+    transform:rotate(6deg);
+}
+
+.book:before{
+    content:"MY ✦";
+    position:absolute;
+    left:27px;
+    top:50px;
+    color:white;
+    font-size:18px;
+}
+
+/* ================= COMIC BOOK ================= */
+
+.comic-book{
+    width:105px;
+    height:140px;
+    right:25%;
+    top:22%;
+    background:#e89b9b;
+    border-radius:5px;
+    box-shadow:5px 6px 0 #b96f78;
+    transform:rotate(-7deg);
+    overflow:hidden;
+}
+
+.comic-book:before{
+    content:"MANGA ♡";
+    position:absolute;
+    left:13px;
+    top:20px;
+    color:white;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.comic-book:after{
+    content:"📖";
+    position:absolute;
+    left:28px;
+    top:58px;
+    font-size:42px;
+}
+
+/* ================= LAPTOP ================= */
+
+.laptop{
+    width:390px;
+    height:270px;
+    left:50%;
+    top:62%;
+    transform:translate(-50%,-50%) scale(1.1);
+    z-index:50;
+}
+
+.screen{
+    width:310px;
+    height:205px;
+    margin:auto;
+    background:#f7dfc4;
+    border:10px solid #62656a;
+    border-radius:12px 12px 4px 4px;
+    position:relative;
+    overflow:hidden;
+    box-shadow:0 5px 0 #4e5054;
+}
+
+/* ================= ADDED SCROLLING ================= */
+
+.screen-page{
+    width:100%;
+    height:100%;
+    padding:20px 13px;
+    text-align:center;
+    color:#735246;
+
+    /* ADDED */
+    overflow-y:auto;
+    overflow-x:hidden;
+    scroll-behavior:smooth;
+    touch-action:auto;
+}
+
+/* Cute scrollbar inside laptop */
+
+.screen-page::-webkit-scrollbar{
+    width:5px;
+}
+
+.screen-page::-webkit-scrollbar-track{
+    background:#f3d9c2;
+    border-radius:10px;
+}
+
+.screen-page::-webkit-scrollbar-thumb{
+    background:#c89f91;
+    border-radius:10px;
+}
+
+.screen-page::-webkit-scrollbar-thumb:hover{
+    background:#aa8175;
+}
+
+/* Firefox scrollbar */
+
+.screen-page{
+    scrollbar-width:thin;
+    scrollbar-color:#c89f91 #f3d9c2;
+}
+
+/* ================= HOME ================= */
+
+.home-page h2{
+    font-size:22px;
+    margin-bottom:5px;
+}
+
+.home-page p{
+    font-size:11px;
+    color:#967567;
+    margin-bottom:17px;
+}
+
+.nav-buttons{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    flex-wrap:wrap;
+}
+
+.nav-buttons button,
+.back-button{
+    border:none;
+    background:#fff8ed;
+    color:#765548;
+    padding:7px 9px;
+    border-radius:15px;
+    font-family:inherit;
+    font-size:10px;
+    cursor:pointer;
+    box-shadow:0 2px 5px rgba(80,50,30,.15);
+    pointer-events:auto;
+    touch-action:manipulation;
+}
+
+.nav-buttons button:hover,
+.back-button:hover{
+    background:white;
+    transform:translateY(-2px);
+}
+
+.other-page{
+    display:none;
+}
+
+.other-page h2{
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.other-page p{
+    font-size:10px;
+    line-height:1.6;
+    color:#765548;
+    text-align:left;
+}
+
+.back-button{
+    margin-top:10px;
+    background:#aa99d0;
+    color:white;
+}
+
+/* ================= KEYBOARD ================= */
+
+.keyboard{
+    width:390px;
+    height:50px;
+    margin-top:5px;
+    background:#777a7e;
+    clip-path:polygon(
+        8% 0,
+        92% 0,
+        100% 100%,
+        0 100%
+    );
+    position:relative;
+}
+
+.keyboard:after{
+    content:"▦ ▦ ▦ ▦ ▦ ▦ ▦ ▦ ▦ ▦ ▦ ▦";
+    position:absolute;
+    left:95px;
+    top:15px;
+    color:#aaa;
+    font-size:11px;
+    letter-spacing:3px;
+}
+
+/* ================= HEADPHONES ================= */
+
+.headphones{
+    width:115px;
+    height:92px;
+    left:5%;
+    bottom:13%;
+    border:13px solid #9888d0;
+    border-bottom:0;
+    border-radius:70px 70px 0 0;
+    transform:rotate(-5deg);
+}
+
+.headphones:before,
+.headphones:after{
+    content:"";
+    position:absolute;
+    top:60px;
+    width:34px;
+    height:53px;
+    background:#a999dc;
+    border-radius:20px;
+}
+
+.headphones:before{
+    left:-20px;
+}
+
+.headphones:after{
+    right:-20px;
+}
+
+/* ================= SCISSORS ================= */
+
+.scissors{
+    right:29%;
+    bottom:17%;
+    font-size:65px;
+    color:#d86d5d;
+    transform:rotate(-15deg);
+}
+
+/* ================= MARKERS ================= */
+
+.markers{
+    left:27%;
+    bottom:13%;
+    display:flex;
+    gap:7px;
+    transform:rotate(-5deg);
+}
+
+.marker{
+    width:65px;
+    height:11px;
+    border-radius:10px;
+    background:#e68b8b;
+}
+
+.marker:nth-child(2){
+    background:#dfb46d;
+}
+
+.marker:nth-child(3){
+    background:#91b2d0;
+}
+
+/* ================= FLOWERS ================= */
+
+.flowers{
+    right:5%;
+    bottom:9%;
+    text-align:center;
+}
+
+.flower{
+    font-size:62px;
+}
+
+.vase{
+    width:72px;
+    height:70px;
+    margin:-8px auto 0;
+    background:#b7b9b3;
+    border-radius:9px 9px 28px 28px;
+}
+
+/* ================= DECORATIONS ================= */
+
+.deco{
+    position:absolute;
+    color:white;
+    opacity:.75;
+    pointer-events:none;
+    font-size:25px;
+}
+
+.d1{
+    left:8%;
+    top:17%;
+}
+
+.d2{
+    right:8%;
+    top:18%;
+}
+
+.d3{
+    left:18%;
+    bottom:30%;
+}
+
+.d4{
+    right:18%;
+    bottom:35%;
+}
+
+/* ================= FOOTER ================= */
+
+.footer{
+    position:absolute;
+    right:18px;
+    bottom:15px;
+    color:#8c6759;
+    font-size:10px;
+    opacity:.75;
+    z-index:1002;
+}
+
+/* ================= HELP ================= */
+
+.help{
+    position:absolute;
+    left:50%;
+    bottom:16px;
+    transform:translateX(-50%);
+    padding:9px 18px;
+    border-radius:22px;
+    background:rgba(255,250,240,.8);
+    color:#765548;
+    font-size:12px;
+    z-index:1000;
+    pointer-events:none;
+}
+
+/* ================= RESET ================= */
+
+#reset{
+    position:absolute;
+    right:15px;
+    bottom:40px;
+    z-index:1001;
+    border:0;
+    background:#fff8ee;
+    color:#765548;
+    border-radius:20px;
+    padding:9px 14px;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+/* ================= POPUPS ================= */
+
+.popup{
+    display:none;
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    background:rgba(70,50,40,.6);
+    z-index:9999;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    touch-action:auto;
+}
+
+.popup-box{
+    width:90%;
+    max-width:700px;
+    max-height:85vh;
+    overflow-y:auto;
+    background:#fff8ed;
+    border-radius:25px;
+    padding:28px;
+    text-align:center;
+    position:relative;
+    box-shadow:0 15px 40px rgba(60,40,30,.3);
+    touch-action:auto;
+}
+
+.popup-box h2{
+    color:#735246;
+    margin-bottom:7px;
+}
+
+.popup-box > p{
+    color:#9b7465;
+    font-size:13px;
+    margin-bottom:20px;
+}
+
+.close{
+    position:absolute;
+    right:15px;
+    top:12px;
+    width:35px;
+    height:35px;
+    border:none;
+    border-radius:50%;
+    background:#efd0aa;
+    color:#735246;
+    font-size:24px;
+    cursor:pointer;
+}
+
+/* ================= JOURNAL ================= */
+
+.journal-box{
+    width:92%;
+    max-width:850px;
+    max-height:85vh;
+    overflow-y:auto;
+    background:#f8ead5;
+    border-radius:18px;
+    padding:28px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(60,40,30,.4);
+}
+
+.journal-title{
+    text-align:center;
+    color:#735246;
+    font-size:24px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.journal-pages{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:3px;
+    background:#c6a477;
+    padding:3px;
+    border-radius:8px;
+}
+
+.journal-page{
+    min-height:360px;
+    padding:30px 25px;
+
+    background:
+    repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 27px,
+        rgba(130,165,165,.25) 28px
+    ),
+    #fffdf6;
+
+    color:#765548;
+    text-align:left;
+    position:relative;
+}
+
+.journal-page:first-child{
+    border-radius:5px 0 0 5px;
+}
+
+.journal-page:last-child{
+    border-radius:0 5px 5px 0;
+}
+
+.journal-page h3{
+    color:#735246;
+    font-size:20px;
+    margin-bottom:20px;
+}
+
+.journal-page p{
+    font-size:13px;
+    line-height:1.8;
+    margin-bottom:15px;
+}
+
+.journal-quote{
+    margin-top:25px;
+    padding:12px;
+    background:#fff0a8;
+    border-radius:8px;
+    text-align:center;
+    font-style:italic;
+    color:#9b7465;
+}
+
+/* ================= NOTEPAD ================= */
+
+.write-box{
+    width:92%;
+    max-width:700px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#f8ead5;
+    border-radius:20px;
+    padding:25px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(60,40,30,.4);
+}
+
+.write-title{
+    text-align:center;
+    color:#735246;
+    font-size:23px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.write-description{
+    text-align:center;
+    color:#9b7465;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.write-area{
+    width:100%;
+    height:300px;
+    resize:vertical;
+    border:none;
+    outline:none;
+
+    background:
+    repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 28px,
+        rgba(130,165,165,.3) 29px
+    ),
+    #fffdf6;
+
+    border-radius:10px;
+    padding:15px;
+    color:#765548;
+    font-family:"Trebuchet MS",Arial,sans-serif;
+    font-size:14px;
+    line-height:29px;
+    user-select:text;
+    touch-action:auto;
+}
+
+.write-area::placeholder{
+    color:#b99a89;
+}
+
+.write-buttons{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:12px;
+    flex-wrap:wrap;
+}
+
+.write-button{
+    border:none;
+    background:#aa99d0;
+    color:white;
+    padding:9px 15px;
+    border-radius:18px;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.write-button.clear{
+    background:#df8d91;
+}
+
+/* ================= DRAWING ================= */
+
+.draw-box{
+    width:92%;
+    max-width:800px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#f8ead5;
+    border-radius:20px;
+    padding:25px;
+    position:relative;
+    box-shadow:0 18px 50px rgba(60,40,30,.4);
+}
+
+.draw-title{
+    text-align:center;
+    color:#735246;
+    font-size:23px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.draw-description{
+    text-align:center;
+    color:#9b7465;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.color-tools{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
+    margin-bottom:12px;
+}
+
+.color-label{
+    color:#765548;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.color-btn{
+    width:27px;
+    height:27px;
+    border-radius:50%;
+    border:3px solid white;
+    box-shadow:0 1px 4px rgba(60,40,30,.25);
+    cursor:pointer;
+}
+
+.color-btn.active{
+    outline:3px solid #735246;
+}
+
+.black{
+    background:#333;
+}
+
+.brown{
+    background:#735246;
+}
+
+.pink{
+    background:#df8d91;
+}
+
+.purple{
+    background:#aa99d0;
+}
+
+.blue{
+    background:#7da9d2;
+}
+
+.green{
+    background:#83ad91;
+}
+
+.yellow{
+    background:#e5bd67;
+}
+
+.red{
+    background:#d66c6c;
+}
+
+.eraser-btn{
+    border:none;
+    background:#fff8ed;
+    color:#765548;
+    padding:7px 11px;
+    border-radius:15px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:11px;
+}
+
+#drawingCanvas{
+    display:block;
+    width:100%;
+    height:400px;
+    background:#fffdf6;
+    border:3px solid #dfcdb5;
+    border-radius:12px;
+    cursor:crosshair;
+    touch-action:none;
+    box-shadow:inset 0 2px 5px rgba(80,50,30,.08);
+}
+
+.draw-buttons{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:12px;
+    flex-wrap:wrap;
+}
+
+.draw-button{
+    border:none;
+    background:#d68f9b;
+    color:white;
+    padding:9px 15px;
+    border-radius:18px;
+    cursor:pointer;
+    font-family:inherit;
+}
+
+.draw-button.save{
+    background:#aa99d0;
+}
+
+/* ================= MANGA ================= */
+
+.manga-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.manga-card{
+    background:#f2e3d2;
+    border-radius:17px;
+    padding:12px;
+    text-align:left;
+    color:#765548;
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+}
+
+.manga-card img{
+    width:95px;
+    height:125px;
+    object-fit:cover;
+    border-radius:9px;
+    flex-shrink:0;
+    background:#efd0aa;
+    box-shadow:2px 3px 7px rgba(70,45,30,.18);
+}
+
+.manga-info{
+    padding-top:3px;
+}
+
+.manga-card h3{
+    color:#735246;
+    margin-bottom:7px;
+    font-size:14px;
+}
+
+.manga-card p{
+    font-size:10px;
+    line-height:1.45;
+}
+
+.manga-tag{
+    display:inline-block;
+    margin-top:8px;
+    padding:4px 8px;
+    background:#fff8ed;
+    border-radius:10px;
+    font-size:9px;
+}
+
+/* ================= PHOTOS ================= */
+
+.photos{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.photos img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:12px;
+    background:#efd0aa;
+    box-shadow:3px 4px 8px rgba(70,45,30,.15);
+    cursor:pointer;
+    transition:.25s;
+}
+
+.photos img:hover{
+    transform:scale(1.05);
+}
+
+/* ================= PROJECTOR ================= */
+
+.photo-projector{
+    display:none;
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+
+    background:
+    radial-gradient(
+        ellipse at center,
+        rgba(255,245,220,.16) 0%,
+        rgba(20,15,12,.92) 65%
+    );
+
+    z-index:30000;
+    justify-content:center;
+    align-items:center;
+    padding:40px;
+}
+
+.photo-projector img{
+    max-width:82vw;
+    max-height:80vh;
+    object-fit:contain;
+    border:8px solid #fff8ed;
+    border-radius:6px;
+    box-shadow:0 20px 60px rgba(0,0,0,.7);
+}
+
+.projector-close{
+    position:absolute;
+    top:20px;
+    right:25px;
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    background:#fff8ed;
+    color:#735246;
+    font-size:30px;
+    cursor:pointer;
+    z-index:30001;
+}
+
+/* ================= MUSIC ================= */
+
+#musicPlayer{
+    width:100%;
+    height:40px;
+    margin-bottom:15px;
+}
+
+.song-list{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.song{
+    background:#f2e3d2;
+    padding:12px;
+    border-radius:15px;
+    text-align:left;
+    color:#765548;
+    cursor:pointer;
+}
+
+.song b{
+    display:block;
+    margin-bottom:3px;
+}
+
+/* ================= RECIPES ================= */
+
+.recipe{
+    background:#f4e4d2;
+    margin-bottom:12px;
+    padding:15px;
+    border-radius:17px;
+    text-align:left;
+    color:#765548;
+}
+
+.recipe h3{
+    margin-bottom:7px;
+}
+
+/* ================= DRINKS ================= */
+
+.drinks{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.drink{
+    padding:18px;
+    background:#f2e3d2;
+    border-radius:18px;
+    color:#765548;
+    font-size:15px;
+}
+
+/* ================= CARTOONS ================= */
+
+.cartoons{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+}
+
+.cartoon{
+    background:#f2e3d2;
+    padding:10px;
+    border-radius:15px;
+}
+
+.cartoon img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+.cartoon p{
+    font-size:11px;
+    color:#765548;
+    margin-top:5px;
+}
+
+/* ================= FLOWERS ================= */
+
+.flower-list{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.favorite-flower{
+    background:#f2e3d2;
+    border-radius:18px;
+    padding:20px;
+    font-size:35px;
+}
+
+.favorite-flower span{
+    display:block;
+    font-size:13px;
+    color:#765548;
+    margin-top:5px;
+}
+
+/* ================= TRY LIST ================= */
+
+.try-list{
+    display:grid;
+    gap:10px;
+}
+
+.try-item{
+    padding:13px;
+    background:#f2e3d2;
+    border-radius:15px;
+    color:#765548;
+    text-align:left;
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:650px){
+
+    .profile-circle{
+        width:65px;
+        height:65px;
+        left:12px;
+        top:15px;
+        border-width:4px;
+    }
+
+    .profile-name{
+        left:0;
+        top:83px;
+        width:90px;
+        font-size:8px;
+    }
+
+    .title{
+        top:15px;
+    }
+
+    .title h1{
+        font-size:22px;
+    }
+
+    .title p{
+        font-size:9px;
+    }
+
+    .notebook{
+        transform:scale(.7) rotate(-5deg);
+    }
+
+    .notepad{
+        transform:scale(.7) rotate(4deg);
+    }
+
+    .pen{
+        transform:scale(.7) rotate(35deg);
+    }
+
+    .camera{
+        transform:scale(.7) rotate(-5deg);
+    }
+
+    .cup{
+        transform:scale(.7);
+    }
+
+    .book,
+    .comic-book{
+        transform:scale(.7) rotate(6deg);
+    }
+
+    .laptop{
+        transform:translate(-50%,-50%) scale(.75);
+    }
+
+    .headphones{
+        transform:scale(.7) rotate(-5deg);
+    }
+
+    .flowers{
+        transform:scale(.65);
+    }
+
+    .markers{
+        transform:scale(.65) rotate(-5deg);
+    }
+
+    .scissors{
+        transform:scale(.7) rotate(-15deg);
+    }
+
+    .help{
+        font-size:9px;
+        white-space:nowrap;
+        bottom:8px;
+    }
+
+    .footer{
+        display:none;
+    }
+
+    #reset{
+        bottom:32px;
+        right:8px;
+        font-size:9px;
+        padding:7px 10px;
+    }
+
+    .photos,
+    .cartoons{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .manga-list{
+        grid-template-columns:1fr;
+    }
+
+    .manga-card img{
+        width:85px;
+        height:115px;
+    }
+
+    .journal-pages{
+        grid-template-columns:1fr;
+    }
+
+    .journal-page{
+        min-height:280px;
+        padding:25px 20px;
+    }
+
+    .journal-page:first-child{
+        border-radius:5px 5px 0 0;
+    }
+
+    .journal-page:last-child{
+        border-radius:0 0 5px 5px;
+    }
+
+    .write-box,
+    .draw-box{
+        width:96%;
+        padding:18px;
+    }
+
+    #drawingCanvas{
+        height:300px;
+    }
+
+    .drinks{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="desk">
+
+<!-- ================= PROFILE ================= -->
+
+<div class="profile-circle">
+    <img src="me.jpg" alt="My Photo">
+</div>
+
+<div class="profile-name">
+    Reinne Kashmir Dinlig ♡
+</div>
+
+<!-- ================= TITLE ================= -->
+
+<div class="title">
+    <h1>my little corner ♡</h1>
+    <p>drag the things around & make your own desk!</p>
+</div>
+
+<div class="deco d1">✦</div>
+<div class="deco d2">♡</div>
+<div class="deco d3">✧</div>
+<div class="deco d4">♡</div>
+
+<!-- ================= DESK OBJECTS ================= -->
+
+<div class="item notebook" id="notebook">
+    <div class="stripe"></div>
+    <div class="heart">♡</div>
+</div>
+
+<div class="item notepad" id="notepad"></div>
+
+<div class="item pen" id="pen"></div>
+
+<div class="item pencil" id="pencil"></div>
+
+<div class="item camera" id="camera"></div>
+
+<div class="item cup" id="cup"></div>
+
+<div class="item book" id="book"></div>
+
+<div class="item comic-book" id="comicBook"></div>
+
+<!-- ================= LAPTOP ================= -->
+
+<div class="item laptop" id="laptop">
+
+<div class="screen">
+
+<div id="homePage" class="screen-page home-page">
+
+<h2>Hello ♡</h2>
+
+<p>Welcome to my little website</p>
+
+<div class="nav-buttons">
+
+<button onclick="openPage('aboutPage')">
+About
+</button>
+
+<button onclick="openPage('lifePage')">
+Life
+</button>
+
+<button onclick="openPage('contactPage')">
+Contact
+</button>
+
+</div>
+</div>
+
+<!-- ================= ABOUT ================= -->
+
+<div id="aboutPage" class="screen-page other-page">
+
+<h2>About ♡</h2>
+
+<p>
+just a normal college student<br><br>
+
+likes reading manga and manhwa whenever there’s free time<br><br>
+
+draws when bored or when inspiration suddenly comes<br><br>
+
+loves baking whenever there’s time for it<br><br>
+
+goes on walks whenever I feel like clearing my mind<br><br>
+
+slowly learning to enjoy the little things again<br><br>
+
+healing slowly and protecting my space<br><br>
+
+still figuring things out, growing at my own pace<br><br>
+
+taking life one day at a time, and that’s okay
+</p>
+
+<button class="back-button"
+onclick="openPage('homePage')">
+← Home
+</button>
+
+</div>
+
+<!-- ================= LIFE ================= -->
+
+<div id="lifePage" class="screen-page other-page">
+
+<h2>Life ♡</h2>
+
+<p>
+I am currently studying for a Bachelor of Science in Criminology in Baguio City.
+</p>
+
+<br>
+
+<p>
+College can be quite challenging. There are days that are tiring and stressful, but I continue learning and moving forward.
+</p>
+
+<br>
+
+<p>
+Along the way, I also met good people who have got my back and whom I can confidently call my friends. They make some of the difficult days feel a little lighter.
+</p>
+
+<br>
+
+<p>
+I am still figuring things out, learning from my experiences, and slowly becoming the person I want to be.
+</p>
+
+<br>
+
+<p>
+I may not have everything figured out yet, but I am proud of myself for continuing, even on the days when it feels difficult.
+</p>
+
+<br>
+
+<p>
+For now, I am taking life one day at a time, protecting my peace, appreciating the little things, and trusting that everything will eventually fall into place.
+</p>
+
+<button class="back-button"
+onclick="openPage('homePage')">
+← Home
+</button>
+
+</div>
+
+<!-- ================= CONTACT ================= -->
+
+<div id="contactPage" class="screen-page other-page">
+
+<h2>Contact Me ♡</h2>
+
+<p>
+Email: rainkashmir418@email.com
+</p>
+
+<br>
+
+<p>
+Facebook: reinnekashmirdinlig
+</p>
+
+<br>
+
+<p>
+Instagram: @lunareinne
+</p>
+
+<button class="back-button"
+onclick="openPage('homePage')">
+← Home
+</button>
+
+</div>
+
+</div>
+
+<div class="keyboard"></div>
+
+</div>
+
+<!-- ================= OTHER OBJECTS ================= -->
+
+<div class="item headphones" id="headphones"></div>
+
+<div class="item scissors" id="scissors">
+✂
+</div>
+
+<div class="item markers">
+
+<div class="marker"></div>
+<div class="marker"></div>
+<div class="marker"></div>
+
+</div>
+
+<div class="item flowers" id="flowers">
+
+<div class="flower">
+🌿🌼🌿
+</div>
+
+<div class="vase"></div>
+
+</div>
+
+<!-- ================= JOURNAL ================= -->
+
+<div class="popup" id="journalPopup">
+
+<div class="journal-box">
+
+<button class="close"
+onclick="closePopup('journalPopup')">
+×
+</button>
+
+<div class="journal-title">
+📖 Little Pieces of Me ♡
+</div>
+
+<div class="journal-pages">
+
+<div class="journal-page">
+
+<h3>Dear Me,</h3>
+
+<p>
+Love yourself a little more than you did yesterday. Make yourself a priority, not because you are selfish, but because you deserve the same love and care you freely give to others.
+
+Chase your goals, even when the journey feels slow. Be grateful for the little things you have and for the moments that make life worth living. Be proud of yourself—not only for what you have achieved, but also for all the battles you have won that nobody knows about.
+
+Remember that you don't have to have everything figured out right now. It is okay to rest, to take things slowly, and to protect your peace. Keep growing, keep healing, and keep choosing yourself.
+
+Dear me, you have made it this far. Be proud of the person you are becoming.
+</p>
+
+<div class="journal-quote">
+“Be gentle with yourself. You are still becoming the person you are meant to be.”
+</div>
+
+</div>
+
+<div class="journal-page">
+
+<h3>Little Reminder ♡</h3>
+
+<p>
+Be patient with yourself.
+You’re doing better than you think.
+Rest when you’re tired.
+Start again when you’re ready.
+Let go of what you cannot control.
+Celebrate the little things.
+Protect your peace.
+Keep going, even if it’s slowly.
+Life isn’t a race.
+You’re allowed to take your time.
+</p>
+
+<div class="journal-quote">
+“You are not behind. You are simply growing at your own pace.”
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= NOTEPAD ================= -->
+
+<div class="popup" id="writePopup">
+
+<div class="write-box">
+
+<button class="close"
+onclick="closePopup('writePopup')">
+×
+</button>
+
+<div class="write-title">
+📝 My Little Notepad ♡
+</div>
+
+<div class="write-description">
+Write your thoughts, reminders, ideas, or anything you want.
+</div>
+
+<textarea
+id="myNotes"
+class="write-area"
+placeholder="Dear diary... ♡
+
+Write something here..."
+></textarea>
+
+<div class="write-buttons">
+
+<button class="write-button"
+onclick="saveNotes()">
+💾 Save Notes
+</button>
+
+<button class="write-button clear"
+onclick="clearNotes()">
+🗑 Clear
+</button>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= DRAWING ================= -->
+
+<div class="popup" id="drawingPopup">
+
+<div class="draw-box">
+
+<button class="close"
+onclick="closePopup('drawingPopup')">
+×
+</button>
+
+<div class="draw-title">
+🖊️ My Little Drawing Pad ♡
+</div>
+
+<div class="draw-description">
+Choose a color and draw anything you want ✨
+</div>
+
+<div class="color-tools">
+
+<span class="color-label">Color:</span>
+
+<button class="color-btn black active"
+onclick="setColor('#333333',this)"
+title="Black"></button>
+
+<button class="color-btn brown"
+onclick="setColor('#735246',this)"
+title="Brown"></button>
+
+<button class="color-btn pink"
+onclick="setColor('#df8d91',this)"
+title="Pink"></button>
+
+<button class="color-btn purple"
+onclick="setColor('#aa99d0',this)"
+title="Purple"></button>
+
+<button class="color-btn blue"
+onclick="setColor('#7da9d2',this)"
+title="Blue"></button>
+
+<button class="color-btn green"
+onclick="setColor('#83ad91',this)"
+title="Green"></button>
+
+<button class="color-btn yellow"
+onclick="setColor('#e5bd67',this)"
+title="Yellow"></button>
+
+<button class="color-btn red"
+onclick="setColor('#d66c6c',this)"
+title="Red"></button>
+
+<button class="eraser-btn"
+onclick="useEraser()">
+🧽 Eraser
+</button>
+
+</div>
+
+<canvas id="drawingCanvas"></canvas>
+
+<div class="draw-buttons">
+
+<button class="draw-button save"
+onclick="saveDrawing()">
+💾 Save Drawing
+</button>
+
+<button class="draw-button"
+onclick="clearDrawing()">
+🗑 Erase Drawing
+</button>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= MANGA ================= -->
+
+<div class="popup" id="mangaPopup">
+
+<div class="popup-box">
+
+<button class="close"
+onclick="closePopup('mangaPopup')">
+×
+</button>
+
+<h2>📕 My Manga & Manhwa Shelf ♡</h2>
+
+<p>
+A few stories you might enjoy reading ✨
+</p>
+
+<div class="manga-list">
+
+<div class="manga-card">
+
+<img src="KillerPeter.jfif"
+class="manga-image"
+alt="Manga or Manhwa 1">
+
+<div class="manga-info">
+
+<h3>Killer Petter</h3>
+
+<p>
+An action webtoon about an elderly
+legendary assassin who gets betrayed
+by his own crime syndicate, miraculously
+reverts to his teenage peak physique, and embarks
+on a path of ruthless revenge.
+</p>
+
+<span class="manga-tag">
+Action • Adventure • Revenge
+</span>
+
+</div>
+</div>
+
+<div class="manga-card">
+
+<img src="DeathIsTheOnlyEndingForThe Villainess.jfif"
+class="manga-image"
+alt="Manga or Manhwa 2">
+
+<div class="manga-info">
+
+<h3>Death Is The Only Ending For The Villainess</h3>
+
+<p>
+Follows a college student who wakes up inside a
+hardcore reverse-harem dating sim as Penelope Eckhart.
+Trapped in the body of an unloved adopted villainess
+where almost every choice triggers a gruesome death,
+she must raise the affection meter of dangerous male characters to survive.
+</p>
+
+<span class="manga-tag">
+Romance • Fantasy • Shoujo
+</span>
+
+</div>
+</div>
+
+<div class="manga-card">
+
+<img src="TrashOfTheCountsCFamily.jfif"
+class="manga-image"
+alt="Manga or Manhwa 3">
+
+<div class="manga-info">
+
+<h3>Trash Of The Counts Family</h3>
+
+<p>
+A fantasy manhwa about Kim Rok Soo, who
+wakes up inside a novel as Cale Henituse,
+a minor villain. Wanting a peaceful and lazy
+life, he tries to change the plot to avoid
+getting beaten up by the true hero, but instead
+gets pulled into massive continental conflicts.
+</p>
+
+<span class="manga-tag">
+Action • Fantasy • Comedy • Adventure
+</span>
+
+</div>
+</div>
+
+<div class="manga-card">
+
+<img src="AStepmothersMarchen.jfif"
+class="manga-image"
+alt="Manga or Manhwa 4">
+
+<div class="manga-info">
+
+<h3>A Stepmothers Marchen</h3>
+
+<p>
+Shuli von Neuschwanstein, a young woman thrust into motherhood who gets a second chance at life after a tragic death.
+</p>
+
+<span class="manga-tag">
+Drama • Fantasy • Romance • Tragedy • Time Travel
+</span>
+
+</div>
+</div>
+
+<div class="manga-card">
+
+<img src="TheHunterWantsToLiveQuietly.jfif"
+class="manga-image"
+alt="Manga or Manhwa 5">
+
+<div class="manga-info">
+
+<h3>The Hunter Wants To Live Quietly</h3>
+
+<p>
+Former S-rank hunter Cha Uijae (J) saves the
+world and wakes up eight years later after being
+presumed dead, hoping to just work at a hangover
+soup restaurant and stay out of trouble.
+</p>
+
+<span class="manga-tag">
+Action • Fantasy • Romance • Monster • Time Travel
+</span>
+
+</div>
+</div>
+
+<div class="manga-card">
+
+<img src="TheSClassThatIRaised.jfif"
+class="manga-image"
+alt="Manga or Manhwa 6">
+
+<div class="manga-info">
+
+<h3>The S-Class That I Raised</h3>
+
+<p>
+Han Yoojin, a useless F-rank hunter who resets
+time after his powerful S-rank brother dies.
+Armed with a unique support skill to nurture
+and buff others, he sets out to raise a new generation
+of elite S-rank allies.
+</p>
+
+<span class="manga-tag">
+Action • Adventure • Comedy • Drama • Fantasy
+</span>
+
+</div>
+</div>
+
+<div class="manga-card">
+
+<img src="Omniscient Reader's Viewpoint.jfif"
+class="manga-image"
+alt="Manga or Manhwa 7">
+
+<div class="manga-info">
+
+<h3>Omniscient Reader's Viewpoint</h3>
+
+<p>
+Kim Dokja, an office worker who is the sole
+reader of a niche 3,149-chapter web novel.
+When the real world suddenly transforms into
+the apocalyptic plot of the story he loves,
+Dokja uses his exclusive foresight to survive.
+</p>
+
+<span class="manga-tag">
+Action • Adventure • Fantasy
+</span>
+
+</div>
+</div>
+
+<div class="manga-card">
+
+<img src="HowToFight.jfif"
+class="manga-image"
+alt="Manga or Manhwa 8">
+
+<div class="manga-info">
+
+<h3>How To Fight</h3>
+
+<p>
+Hobin Yoo, a weak, bullied high schooler who
+starts a fighting NewTube channel to pay his
+mother's medical bills. Guided by online tutorials,
+he learns real martial arts to defeat stronger opponents
+and gain viral fame.
+</p>
+
+<span class="manga-tag">
+Action • Drama • Comedy
+</span>
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+<!-- ================= CAMERA ================= -->
+
+<div class="popup" id="cameraPopup">
+
+<div class="popup-box">
+
+<button class="close"
+onclick="closePopup('cameraPopup')">
+×
+</button>
+
+<h2>My Little Memories ♡</h2>
+
+<p>Click a photo ✨</p>
+
+<div class="photos">
+
+<img src="photo1.jpg" onclick="showPhoto(this)">
+<img src="photo2.jpg" onclick="showPhoto(this)">
+<img src="photo3.jpg" onclick="showPhoto(this)">
+<img src="photo4.jpg" onclick="showPhoto(this)">
+<img src="photo5.jpg" onclick="showPhoto(this)">
+<img src="photo6.jpg" onclick="showPhoto(this)">
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= PHOTO PROJECTOR ================= -->
+
+<div id="photoProjector"
+class="photo-projector"
+onclick="closePhoto(event)">
+
+<button class="projector-close"
+onclick="closePhoto(event)">
+×
+</button>
+
+<img id="bigPhoto"
+onclick="event.stopPropagation()">
+
+</div>
+
+<!-- ================= MUSIC ================= -->
+
+<div class="popup" id="musicPopup">
+
+<div class="popup-box">
+
+<button class="close"
+onclick="closePopup('musicPopup')">
+×
+</button>
+
+<h2>🎧 My Favorite Songs ♡</h2>
+
+<p>Click a song to play it!</p>
+
+<audio id="musicPlayer" controls>
+Your browser does not support audio.
+</audio>
+
+<div class="song-list">
+
+<div class="song"
+onclick="playSong('Billy Joel - Vienna.mp3')">
+<b>🎵 Vienna</b>
+Billy Joel
+</div>
+
+<div class="song"
+onclick="playSong('Ben&Ben - Leaves feat. Young K.mp3')">
+<b>🎵 Leaves</b>
+Ben&Ben
+</div>
+
+<div class="song"
+onclick="playSong('Chloe Adams - Pretty's On The Inside.mp3')">
+<b>🎵 Pretty's On The Inside</b>
+Chloe Adams
+</div>
+
+<div class="song"
+onclick="playSong('Anson Seabra - Trying My Best.mp3')">
+<b>🎵 Trying My Best</b>
+Anson Seabra
+</div>
+
+<div class="song"
+onclick="playSong('Em Beihold - Numb Little Bug.mp3')">
+<b>🎵 Numb Little Bug</b>
+Em Beihold
+</div>
+
+<div class="song"
+onclick="playSong('KhloeRoseFictional.mp3')">
+<b>🎵 Fictional</b>
+Khloe Rose
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= RECIPES ================= -->
+
+<div class="popup" id="recipePopup">
+
+<div class="popup-box">
+
+<button class="close"
+onclick="closePopup('recipePopup')">
+×
+</button>
+
+<h2>📕 My Little Recipe Book ♡</h2>
+
+<p></p>
+
+<div class="recipe">
+
+<h3>Red Velvet</h3>
+
+<p>
+<strong>Ingredients:</strong><br>
+2 cups all-purpose flour<br>
+1½ teaspoons baking soda<br>
+½ teaspoon salt<br>
+1½ cups sugar<br>
+½ cup cocoa powder<br>
+3 large eggs, beaten<br>
+1 cup + 2 tablespoons oil<br>
+1½ cups grated cooked beets<br>
+2 teaspoons vanilla extract<br>
+8 oz cream cheese, softened<br>
+¾ cup powdered sugar, or more to taste<br>
+1 stick butter, room temperature
+</p>
+
+<p>
+<strong>Steps:</strong><br>
+1. Prepare the oven<br>
+Preheat oven to 350°F (175°C). Grease and flour a 9 × 13-inch baking pan.<br><br>
+
+2. Mix the dry ingredients<br>
+In a bowl, combine flour, baking soda, salt, sugar, and cocoa powder. Set aside.<br><br>
+
+3. Mix the wet ingredients<br>
+In another mixing bowl, combine the beaten eggs and oil. Beat in the vanilla until well blended.<br><br>
+
+4. Combine<br>
+Slowly add the dry ingredients to the wet mixture. Beat until well combined.<br><br>
+
+5. Add the beets<br>
+Stir in the grated cooked beets until evenly distributed.<br><br>
+
+6. Bake<br>
+Pour the batter into the prepared pan. Bake at 350°F (175°C) for 25–35 minutes, or until the cake springs back when lightly touched.<br><br>
+
+7. Cool<br>
+Let the cake cool completely in the pan on a rack.<br><br>
+
+8. Make the frosting<br>
+Beat the softened cream cheese and room-temperature butter together. Add the powdered sugar. Beat until smooth and fluffy.<br><br>
+
+Spread over the completely cooled cake. Refrigerate until ready to eat.
+</p>
+
+</div>
+
+<div class="recipe">
+
+<h3>Cinnamon Rolls</h3>
+
+<p>
+<strong>Ingredients:</strong><br>
+⅔ cup (151 g) cold whole milk<br>
+2½ cups (300 g) bread flour<br>
+1 tsp (6 g) salt<br>
+2 tbsp (25 g) granulated sugar<br>
+2 tsp instant yeast<br>
+4 tbsp (57 g) unsalted butter, softened<br>
+1 tbsp (14 g) butter, melted<br>
+½ cup (107 g) packed light brown sugar<br>
+2 tbsp (14 g) bread flour<br>
+3–4 tsp (8–10 g) ground cinnamon<br>
+1/16 tsp salt<br>
+3 tbsp (42 g) butter, melted, divided<br>
+½ tsp vanilla extract<br>
+1/16 tsp salt<br>
+1½ cups (170 g) confectioners’ sugar, sifted<br>
+1–2 tbsp (14–28 g) milk, heavy cream, or buttermilk
+</p>
+
+<p>
+<strong>Steps:</strong><br>
+Make the Dough<br><br>
+
+Add the cold milk, flour, salt, sugar, yeast, and softened butter to the tangzhong.<br><br>
+
+Mix until the dough comes together.<br><br>
+
+Knead until the dough becomes smooth, elastic, and slightly tacky. This takes about 15 minutes by hand or 10–12 minutes with a mixer.<br><br>
+
+<strong>First Rise</strong><br><br>
+
+Shape the dough into a ball and place it in a covered bowl. Let it rise for 60–90 minutes, until puffy.<br><br>
+
+<strong>Make the Filling</strong><br><br>
+
+Mix together melted butter, brown sugar, bread flour, cinnamon, and salt until it resembles damp sand.<br><br>
+
+Place the dough on a lightly greased surface. Press or roll it into a 10 × 12-inch rectangle, about ½ inch thick.<br><br>
+
+Spread the cinnamon filling over the dough, leaving about ½ inch uncovered along one long edge.<br><br>
+
+Starting from the filled long side, roll the dough into a log. Divide it into 8 equal pieces.<br><br>
+
+Place the rolls on a lightly greased or parchment-lined baking sheet, leaving space between them.<br><br>
+
+Cover the rolls and let them rise for 30–60 minutes, until puffy.<br><br>
+
+Preheat the oven to 375°F (190°C).<br><br>
+
+Bake for 14–18 minutes, until lightly golden.<br><br>
+
+For extra-soft cinnamon rolls, bake closer to 14 minutes.<br><br>
+
+As soon as they come out of the oven, brush them with 1½ tbsp melted butter.<br><br>
+
+Let them cool for 10–15 minutes.<br><br>
+
+Mix together remaining melted butter, vanilla, salt, powdered sugar, and milk/cream/buttermilk.<br><br>
+
+Mix until smooth and adjust the liquid until you get your preferred consistency.<br><br>
+
+Spread the icing over the warm cinnamon rolls and enjoy! 🤎
+</p>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= DRINKS ================= -->
+
+<div class="popup" id="drinkPopup">
+
+<div class="popup-box">
+
+<button class="close"
+onclick="closePopup('drinkPopup')">
+×
+</button>
+
+<h2>☕ My Favorite Drinks ♡</h2>
+
+<p>Drinks I love</p>
+
+<div class="drinks">
+
+<div class="drink">☕ Iced Coffee</div>
+<div class="drink">🍵 Matcha</div>
+<div class="drink">🧋 Milk Tea</div>
+<div class="drink">🍓 Mango Shake</div>
+<div class="drink">🥤 Soda</div>
+<div class="drink">🍫 Chocolate</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= CARTOONS ================= -->
+
+<div class="popup" id="cartoonPopup">
+
+<div class="popup-box">
+
+<button class="close"
+onclick="closePopup('cartoonPopup')">
+×
+</button>
+
+<h2>✏️ My Favorite Anime ♡</h2>
+
+<p>Animated shows I like</p>
+
+<div class="cartoons">
+
+<div class="cartoon">
+<img src="OnePiece.jfif">
+<p>One Piece</p>
+</div>
+
+<div class="cartoon">
+<img src="SoulEater.jfif">
+<p>Soul Eater 2</p>
+</div>
+
+<div class="cartoon">
+<img src="Eyeshield 21.jfif">
+<p>Eyeshield 21</p>
+</div>
+
+<div class="cartoon">
+<img src="Fairy Tail.jfif">
+<p>Fairy Tail</p>
+</div>
+
+<div class="cartoon">
+<img src="Your Name.jfif">
+<p>Your Name</p>
+</div>
+
+<div class="cartoon">
+<img src="Spirited Away.jfif">
+<p>Spirited Away</p>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= FLOWERS ================= -->
+
+<div class="popup" id="flowerPopup">
+
+<div class="popup-box">
+
+<button class="close"
+onclick="closePopup('flowerPopup')">
+×
+</button>
+
+<h2>🌸 My Favorite Flowers ♡</h2>
+
+<p>Flowers that I love</p>
+
+<div class="flower-list">
+
+<div class="favorite-flower">
+🌹
+<span>Roses</span>
+</div>
+
+<div class="favorite-flower">
+🌷
+<span>Tulips</span>
+</div>
+
+<div class="favorite-flower">
+🌻
+<span>Sunflowers</span>
+</div>
+
+<div class="favorite-flower">
+🌸
+<span>Cherry Blossoms</span>
+</div>
+
+<div class="favorite-flower">
+🪻
+<span>Lavender</span>
+</div>
+
+<div class="favorite-flower">
+🌼
+<span>Daisies</span>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= TRY ================= -->
+
+<div class="popup" id="tryPopup">
+
+<div class="popup-box">
+
+<button class="close"
+onclick="closePopup('tryPopup')">
+×
+</button>
+
+<h2>✂️ Things I Want to Try ♡</h2>
+
+<p>
+Little things I want to experience and learn
+</p>
+
+<div class="try-list">
+
+<div class="try-item">
+🎨 Try a new art style
+</div>
+
+<div class="try-item">
+🧁 Learn new baking recipes
+</div>
+
+<div class="try-item">
+📸 Improve my photography
+</div>
+
+<div class="try-item">
+🌲 Visit new places
+</div>
+
+<div class="try-item">
+🎬 Learn to Make creative videos
+</div>
+
+<div class="try-item">
+👩‍🍳 Learn more cooking recipes
+</div>
+
+<div class="try-item">
+💐 Learn to be patient
+</div>
+
+<div class="try-item">
+✨ Trying something outside my comfort zone
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- ================= HELP ================= -->
+
+<div class="help">
+♡ Drag • Stack • Arrange • Double-click the objects ♡
+</div>
+
+<button id="reset">
+↻ Reset Desk
+</button>
+
+<div class="footer">
+© 2026 Reinne Kashmir Dinlig♡
+</div>
+
+</div>
+
+<script>
+
+/* ================= LAPTOP ================= */
+
+function openPage(pageID){
+
+    const pages =
+        document.querySelectorAll(".screen-page");
+
+    pages.forEach(function(page){
+        page.style.display="none";
+    });
+
+    const selectedPage =
+        document.getElementById(pageID);
+
+    selectedPage.style.display="block";
+
+    /* ADDED:
+       Always start the selected laptop page
+       from the top when opened.
+    */
+
+    selectedPage.scrollTop=0;
+}
+
+/* ================= POPUPS ================= */
+
+function openPopup(id){
+
+    document.getElementById(id)
+        .style.display="flex";
+
+    if(id === "drawingPopup"){
+
+        setTimeout(function(){
+
+            resizeCanvas();
+            loadDrawing();
+
+        },50);
+
+    }
+}
+
+function closePopup(id){
+
+    document.getElementById(id)
+        .style.display="none";
+}
+
+/* ================= PHOTO PROJECTOR ================= */
+
+function showPhoto(photo){
+
+    const projector =
+        document.getElementById("photoProjector");
+
+    const bigPhoto =
+        document.getElementById("bigPhoto");
+
+    bigPhoto.src = photo.src;
+
+    projector.style.display="flex";
+}
+
+function closePhoto(event){
+
+    if(event){
+        event.stopPropagation();
+    }
+
+    document.getElementById("photoProjector")
+        .style.display="none";
+}
+
+/* ================= MUSIC ================= */
+
+function playSong(songFile){
+
+    const player =
+        document.getElementById("musicPlayer");
+
+    player.src=songFile;
+
+    player.play();
+}
+
+/* ================= NOTES ================= */
+
+const notesBox =
+    document.getElementById("myNotes");
+
+const savedNotes =
+    localStorage.getItem("myLittleNotes");
+
+if(savedNotes){
+    notesBox.value=savedNotes;
+}
+
+function saveNotes(){
+
+    localStorage.setItem(
+        "myLittleNotes",
+        notesBox.value
+    );
+
+    alert("♡ Your notes have been saved!");
+}
+
+function clearNotes(){
+
+    if(confirm("Clear all your written notes?")){
+
+        notesBox.value="";
+
+        localStorage.removeItem(
+            "myLittleNotes"
+        );
+
+    }
+
+}
+
+/* ================= DRAWING ================= */
+
+const canvas =
+    document.getElementById("drawingCanvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+let drawing=false;
+
+let currentColor="#333333";
+
+let isEraser=false;
+
+/* COLOR */
+
+function setColor(color,button){
+
+    currentColor=color;
+
+    isEraser=false;
+
+    document
+        .querySelectorAll(".color-btn")
+        .forEach(function(btn){
+            btn.classList.remove("active");
+        });
+
+    if(button){
+        button.classList.add("active");
+    }
+}
+
+/* ERASER */
+
+function useEraser(){
+
+    isEraser=true;
+
+    document
+        .querySelectorAll(".color-btn")
+        .forEach(function(btn){
+            btn.classList.remove("active");
+        });
+}
+
+/* RESIZE */
+
+function resizeCanvas(){
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    if(rect.width === 0 || rect.height === 0){
+        return;
+    }
+
+    let oldImage=null;
+
+    if(canvas.width > 0 && canvas.height > 0){
+
+        try{
+            oldImage=canvas.toDataURL();
+        }
+        catch(error){
+            oldImage=null;
+        }
+
+    }
+
+    canvas.width=rect.width;
+    canvas.height=rect.height;
+
+    if(oldImage){
+
+        const img=new Image();
+
+        img.onload=function(){
+
+            ctx.drawImage(
+                img,
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+        };
+
+        img.src=oldImage;
+    }
+
+}
+
+/* POSITION */
+
+function getCanvasPosition(e){
+
+    const rect =
+        canvas.getBoundingClientRect();
+
+    return {
+
+        x:
+            (e.clientX - rect.left)
+            * (canvas.width / rect.width),
+
+        y:
+            (e.clientY - rect.top)
+            * (canvas.height / rect.height)
+
+    };
+
+}
+
+/* START DRAWING */
+
+canvas.addEventListener(
+    "pointerdown",
+    function(e){
+
+        e.preventDefault();
+
+        drawing=true;
+
+        canvas.setPointerCapture(
+            e.pointerId
+        );
+
+        const pos =
+            getCanvasPosition(e);
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            pos.x,
+            pos.y
+        );
+
+    }
+);
+
+/* DRAW */
+
+canvas.addEventListener(
+    "pointermove",
+    function(e){
+
+        if(!drawing){
+            return;
+        }
+
+        e.preventDefault();
+
+        const pos =
+            getCanvasPosition(e);
+
+        ctx.lineWidth =
+            isEraser ? 22 : 4;
+
+        ctx.lineCap="round";
+        ctx.lineJoin="round";
+
+        if(isEraser){
+
+            ctx.globalCompositeOperation =
+                "destination-out";
+
+        }
+        else{
+
+            ctx.globalCompositeOperation =
+                "source-over";
+
+            ctx.strokeStyle =
+                currentColor;
+
+        }
+
+        ctx.lineTo(
+            pos.x,
+            pos.y
+        );
+
+        ctx.stroke();
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+            pos.x,
+            pos.y
+        );
+
+    }
+);
+
+/* STOP */
+
+canvas.addEventListener(
+    "pointerup",
+    function(){
+
+        drawing=false;
+
+        ctx.beginPath();
+
+        ctx.globalCompositeOperation =
+            "source-over";
+
+        saveDrawing();
+
+    }
+);
+
+canvas.addEventListener(
+    "pointercancel",
+    function(){
+
+        drawing=false;
+
+        ctx.beginPath();
+
+        ctx.globalCompositeOperation =
+            "source-over";
+
+    }
+);
+
+/* SAVE DRAWING */
+
+function saveDrawing(){
+
+    try{
+
+        localStorage.setItem(
+            "myLittleDrawing",
+            canvas.toDataURL("image/png")
+        );
+
+    }
+    catch(error){
+
+        console.log(
+            "Could not save drawing."
+        );
+
+    }
+
+}
+
+/* LOAD DRAWING */
+
+function loadDrawing(){
+
+    const saved =
+        localStorage.getItem(
+            "myLittleDrawing"
+        );
+
+    if(!saved){
+        return;
+    }
+
+    const img =
+        new Image();
+
+    img.onload=function(){
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        ctx.globalCompositeOperation =
+            "source-over";
+
+        ctx.drawImage(
+            img,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    };
+
+    img.src=saved;
+
+}
+
+/* CLEAR DRAWING */
+
+function clearDrawing(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    localStorage.removeItem(
+        "myLittleDrawing"
+    );
+
+}
+
+/* ================= DOUBLE CLICK ================= */
+
+document.getElementById("notebook")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        openPopup("journalPopup");
+
+    }
+);
+
+document.getElementById("notepad")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        openPopup("writePopup");
+
+    }
+);
+
+document.getElementById("pen")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        openPopup("drawingPopup");
+
+    }
+);
+
+document.getElementById("camera")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        openPopup("cameraPopup");
+
+    }
+);
+
+document.getElementById("headphones")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        openPopup("musicPopup");
+
+    }
+);
+
+document.getElementById("book")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        openPopup("recipePopup");
+
+    }
+);
+
+document.getElementById("comicBook")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        openPopup("mangaPopup");
+
+    }
+);
+
+document.getElementById("cup")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        openPopup("drinkPopup");
+
+    }
+);
+
+document.getElementById("pencil")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        openPopup("cartoonPopup");
+
+    }
+);
+
+document.getElementById("flowers")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        openPopup("flowerPopup");
+
+    }
+);
+
+document.getElementById("scissors")
+.addEventListener(
+    "dblclick",
+    function(){
+
+        openPopup("tryPopup");
+
+    }
+);
+
+/* ================= CLOSE OUTSIDE ================= */
+
+document.querySelectorAll(".popup")
+.forEach(function(popup){
+
+    popup.addEventListener(
+        "click",
+        function(e){
+
+            if(e.target === popup){
+
+                popup.style.display="none";
+
+            }
+
+        }
+    );
+
+});
+
+/* ================= DRAG OBJECTS ================= */
+
+const desk =
+    document.getElementById("desk");
+
+const items =
+    document.querySelectorAll(".item");
+
+let highestZ=100;
+
+items.forEach(function(item){
+
+    item.addEventListener(
+        "pointerdown",
+        startDrag
+    );
+
+});
+
+function startDrag(e){
+
+    if(
+        e.target.tagName==="BUTTON" ||
+        e.target.tagName==="TEXTAREA"
+    ){
+        return;
+    }
+
+    e.preventDefault();
+
+    const item =
+        e.currentTarget;
+
+    highestZ++;
+
+    item.style.zIndex=highestZ;
+
+    item.classList.add(
+        "dragging"
+    );
+
+    const deskRect =
+        desk.getBoundingClientRect();
+
+    const itemRect =
+        item.getBoundingClientRect();
+
+    const offsetX =
+        e.clientX -
+        itemRect.left;
+
+    const offsetY =
+        e.clientY -
+        itemRect.top;
+
+    item.setPointerCapture(
+        e.pointerId
+    );
+
+    function move(ev){
+
+        let x =
+            ev.clientX -
+            deskRect.left -
+            offsetX;
+
+        let y =
+            ev.clientY -
+            deskRect.top -
+            offsetY;
+
+        x=Math.max(
+            0,
+            Math.min(
+                x,
+                desk.clientWidth -
+                item.offsetWidth
+            )
+        );
+
+        y=Math.max(
+            0,
+            Math.min(
+                y,
+                desk.clientHeight -
+                item.offsetHeight
+            )
+        );
+
+        item.style.left =
+            x+"px";
+
+        item.style.top =
+            y+"px";
+
+        item.style.right="auto";
+        item.style.bottom="auto";
+        item.style.transform="none";
+
+    }
+
+    function stop(){
+
+        item.classList.remove(
+            "dragging"
+        );
+
+        item.removeEventListener(
+            "pointermove",
+            move
+        );
+
+        item.removeEventListener(
+            "pointerup",
+            stop
+        );
+
+        item.removeEventListener(
+            "pointercancel",
+            stop
+        );
+
+    }
+
+    item.addEventListener(
+        "pointermove",
+        move
+    );
+
+    item.addEventListener(
+        "pointerup",
+        stop
+    );
+
+    item.addEventListener(
+        "pointercancel",
+        stop
+    );
+
+}
+
+/* ================= RESIZE ================= */
+
+window.addEventListener(
+    "resize",
+    function(){
+
+        if(
+            document.getElementById(
+                "drawingPopup"
+            ).style.display === "flex"
+        ){
+
+            resizeCanvas();
+
+        }
+
+    }
+);
+
+/* ================= RESET ================= */
+
+document.getElementById("reset")
+.addEventListener(
+    "click",
+    function(){
+
+        location.reload();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
